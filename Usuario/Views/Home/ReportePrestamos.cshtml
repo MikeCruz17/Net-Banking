@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Entidades.Reporte_Prestamos>
+
+@{
+    ViewBag.Title = "ReportePrestamos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+<br />
+<h2>Reporte de Prestamos</h2>
+<hr>
+
+<br />
+<div class="col-md-offset-2 col-md-10">
+    <a class="btn btn-success" href="/Home/CrearPrestamos">Añadir</a>
+    <a class="btn btn-primary" href="/Home/Administracion">Volver a Inicio</a>
+    </div>
+    <br />
+    <br />
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MONTO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cuenta_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cuota)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad_Meses)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Estado == "Activo")
+            {
+
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MONTO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cuenta_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cuota)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad_Meses)
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" href="/Home/DeshabilitarPrestamo/@item.ID">Deshabilitar</a>
+                        <a class="btn btn-warning" href="/Home/EditarPrestamo/@item.ID">Editar</a>
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Entidades.Reporte_TRANSACCIONES_FECHA_Result>
+
+@{
+    ViewBag.Title = "RangoFechaTransacciones";
+}
+
+<h2>RangoFechaTransacciones</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_CUENTA_DEPOSITO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_CUENTA_ENVIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DINERO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo_Transaccion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_CUENTA_DEPOSITO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_CUENTA_ENVIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DINERO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo_Transaccion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

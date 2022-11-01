@@ -1,0 +1,60 @@
+﻿@model Entidades.TARJETAS
+
+@{
+    ViewBag.Title = "EditarTarjeta";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+<br />
+<h2>Editar Tarjeta</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10  p-0 w-25">
+                @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cuenta_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10  p-0 w-25">
+                @Html.EditorFor(model => model.Cuenta_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cuenta_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cedula, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10  p-0 w-25">
+                @Html.EditorFor(model => model.Cedula, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cedula, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fecha_de_Vencimiento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10  p-0 w-25">
+                @Html.EditorFor(model => model.Fecha_de_Vencimiento, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.Fecha_de_Vencimiento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <br />
+                <input type="submit" value="Guardar" class="btn btn-outline-dark" />
+                <a class="btn btn-dark" href="~/Home/ReporteTarjetas">Volver</a>
+            </div>
+        </div>
+    </div>
+}

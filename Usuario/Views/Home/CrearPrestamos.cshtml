@@ -1,0 +1,127 @@
+﻿@model Entidades.PRESTAMO
+
+@{
+    ViewBag.Title = "CrearPrestamos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <br />
+    <h2>Crear Prestamos</h2>
+    <hr />
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Monto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10  p-0 w-25">
+                @Html.EditorFor(model => model.Monto, new { htmlAttributes = new { @class = "form-control", @id = "Monto" } })
+                @Html.ValidationMessageFor(model => model.Monto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cantidad_Meses, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 p-0 w-25">
+                @Html.EditorFor(model => model.Cantidad_Meses, new { htmlAttributes = new { @class = "form-control", @id = "Cantidad", @onkeyup = "Calcular()" } })
+                @Html.ValidationMessageFor(model => model.Cantidad_Meses, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cedula, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 p-0 w-25">
+                @Html.EditorFor(model => model.Cedula, new { htmlAttributes = new { @class = "form-control", @id = "Cedula" } })
+                @Html.ValidationMessageFor(model => model.Cedula, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cuenta_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 p-0 w-25">
+                @Html.EditorFor(model => model.Cuenta_id, new { htmlAttributes = new { @class = "form-control", @id = "Cuenta" } })
+                @Html.ValidationMessageFor(model => model.Cuenta_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cuota_Mensual, htmlAttributes: new { @class = "control-label col-md-2"})
+            <div class="col-md-10 p-0 w-25">
+                @Html.EditorFor(model => model.Cuota_Mensual, new { htmlAttributes = new { @class = "form-control", @id = "Cuota", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Cuota_Mensual, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 p-0 w-25">
+                @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control", @id = "Estado", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 p-0 w-25">
+                @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @id = "Fecha", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <br>
+                <input type="submit" value="Crear" class="btn btn-outline-dark" />
+                <a class="btn btn-outline-primary" href="/Home/Administracion">Volver a Inicio</a>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+
+    function Calcular() {
+
+        var cantidad = document.getElementById('Cantidad').value;
+        var monto = document.getElementById('Monto').value;
+
+        var Total = parseInt(monto) / parseInt(cantidad);
+
+        console.log(Total);
+
+
+
+        document.getElementById('Cuota').value = Math.round(Total);
+    }
+
+    function Limpiar() {
+
+        document.getElementById('Monto').value = null;
+        document.getElementById('Cantidad').value = null;
+        document.getElementById('Cedula').value = null;
+        document.getElementById('Cuenta').value = null;
+        document.getElementById('Cuota').value = null;
+        document.getElementById('Estado').value = null;
+
+    }
+
+    window.onload = function () {
+
+        const FechaActual = Date.now();
+        const Fecha = new Date(FechaActual);
+
+        document.getElementById("Fecha").value = Fecha.toLocaleDateString();
+        document.getElementById("Estado").value = "Activo";
+    }
+
+
+</script>

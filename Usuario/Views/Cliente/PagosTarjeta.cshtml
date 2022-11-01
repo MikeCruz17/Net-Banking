@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Entidades.PAGO_TARJETA>
+
+@{
+    ViewBag.Title = "PagosTarjeta";
+}
+
+<br />
+<h2>Historial de Pagos de la Tarjeta</h2>
+<hr />
+<br />
+<a class="btn btn-outline-dark" href="/Cliente/Tarjetas">Volver</a>
+<br />
+<br />
+
+<table class="table table-dark table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_TARJETA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance_Limite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total_Pago)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model)
+{
+
+    if (item.Cedula == @ViewBag.Cedula)
+    {
+        if (item.ID_TARJETA == ViewBag.Numero)
+        {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.ID_TARJETA)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cuenta_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Balance)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Balance_Limite)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Total_Pago)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Fecha)
+    </td>
+
+</tr>
+        }
+    }
+}
+
+</table>

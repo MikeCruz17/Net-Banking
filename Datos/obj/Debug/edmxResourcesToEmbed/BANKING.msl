@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BANKINGModelStoreContainer" CdmEntityContainer="BANKINGEntities">
+    <EntitySetMapping Name="CUENTAS">
+      <EntityTypeMapping TypeName="BANKINGModel.CUENTAS">
+        <MappingFragment StoreEntitySet="CUENTAS">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Monto_Limite" ColumnName="Monto_Limite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PAGOS">
+      <EntityTypeMapping TypeName="BANKINGModel.PAGOS">
+        <MappingFragment StoreEntitySet="PAGOS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Cuenta_pago" ColumnName="Cuenta_pago" />
+          <ScalarProperty Name="Cuenta_deposito" ColumnName="Cuenta_deposito" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRESTAMO">
+      <EntityTypeMapping TypeName="BANKINGModel.PRESTAMO">
+        <MappingFragment StoreEntitySet="PRESTAMO">
+          <ScalarProperty Name="Cantidad_Meses" ColumnName="Cantidad_Meses" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Cuenta_id" ColumnName="Cuenta_id" />
+          <ScalarProperty Name="Cuota_Mensual" ColumnName="Cuota_Mensual" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROL">
+      <EntityTypeMapping TypeName="BANKINGModel.ROL">
+        <MappingFragment StoreEntitySet="ROL">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TARJETAS">
+      <EntityTypeMapping TypeName="BANKINGModel.TARJETAS">
+        <MappingFragment StoreEntitySet="TARJETAS">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="BALANCE_LIMITE" ColumnName="BALANCE_LIMITE" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="Cuenta_id" ColumnName="Cuenta_id" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Fecha_de_Vencimiento" ColumnName="Fecha_de_Vencimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="BANKINGModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="ID_Rol" ColumnName="ID_Rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="PAGO_DE_TARJETA" FunctionName="BANKINGModel.Store.PAGO_DE_TARJETA" />
+    <FunctionImportMapping FunctionImportName="PAGOS_Prestamos" FunctionName="BANKINGModel.Store.PAGOS_Prestamos" />
+    <FunctionImportMapping FunctionImportName="TRANSACCIONES" FunctionName="BANKINGModel.Store.TRANSACCIONES" />
+    <EntitySetMapping Name="Reporte_Prestamos">
+      <EntityTypeMapping TypeName="BANKINGModel.Reporte_Prestamos">
+        <MappingFragment StoreEntitySet="Reporte_Prestamos">
+          <ScalarProperty Name="Cantidad_Meses" ColumnName="Cantidad_Meses" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Cuota" ColumnName="Cuota" />
+          <ScalarProperty Name="Cuenta_id" ColumnName="Cuenta_id" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reporte_Tarjetas">
+      <EntityTypeMapping TypeName="BANKINGModel.Reporte_Tarjetas">
+        <MappingFragment StoreEntitySet="Reporte_Tarjetas">
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Fecha_de_Vencimiento" ColumnName="Fecha_de_Vencimiento" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reporte_Usuarios">
+      <EntityTypeMapping TypeName="BANKINGModel.Reporte_Usuarios">
+        <MappingFragment StoreEntitySet="Reporte_Usuarios">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportesCuentas">
+      <EntityTypeMapping TypeName="BANKINGModel.ReportesCuentas">
+        <MappingFragment StoreEntitySet="ReportesCuentas">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Monto_Limite" ColumnName="Monto_Limite" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre_Cliente" ColumnName="Nombre_Cliente" />
+          <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PAGO_PRESTAMO">
+      <EntityTypeMapping TypeName="BANKINGModel.PAGO_PRESTAMO">
+        <MappingFragment StoreEntitySet="PAGO_PRESTAMO">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Cantidad_meses" ColumnName="Cantidad_meses" />
+          <ScalarProperty Name="Cuota_Mensual" ColumnName="Cuota_Mensual" />
+          <ScalarProperty Name="Cuenta_id" ColumnName="Cuenta_id" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="ID_PRESTAMO" ColumnName="ID_PRESTAMO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRANSACCION_TARJETA">
+      <EntityTypeMapping TypeName="BANKINGModel.TRANSACCION_TARJETA">
+        <MappingFragment StoreEntitySet="TRANSACCION_TARJETA">
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="DINERO" ColumnName="DINERO" />
+          <ScalarProperty Name="ID_CUENTA_ENVIO" ColumnName="ID_CUENTA_ENVIO" />
+          <ScalarProperty Name="Numero_Tarjeta" ColumnName="Numero_Tarjeta" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PAGO_TARJETA">
+      <EntityTypeMapping TypeName="BANKINGModel.PAGO_TARJETA">
+        <MappingFragment StoreEntitySet="PAGO_TARJETA">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Total_Pago" ColumnName="Total_Pago" />
+          <ScalarProperty Name="Balance_Limite" ColumnName="Balance_Limite" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Cuenta_id" ColumnName="Cuenta_id" />
+          <ScalarProperty Name="ID_TARJETA" ColumnName="ID_TARJETA" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="TRANSACCIONES_TARJETAS" FunctionName="BANKINGModel.Store.TRANSACCIONES_TARJETAS" />
+    <EntitySetMapping Name="TRANSACCION">
+      <EntityTypeMapping TypeName="BANKINGModel.TRANSACCION">
+        <MappingFragment StoreEntitySet="TRANSACCION">
+          <ScalarProperty Name="Tipo_Transaccion" ColumnName="Tipo_Transaccion" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="DINERO" ColumnName="DINERO" />
+          <ScalarProperty Name="ID_CUENTA_ENVIO" ColumnName="ID_CUENTA_ENVIO" />
+          <ScalarProperty Name="ID_CUENTA_DEPOSITO" ColumnName="ID_CUENTA_DEPOSITO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Reporte_TRANSACCIONES_FECHA" FunctionName="BANKINGModel.Store.Reporte_TRANSACCIONES_FECHA">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BANKINGModel.Reporte_TRANSACCIONES_FECHA_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_CUENTA_DEPOSITO" ColumnName="ID_CUENTA_DEPOSITO" />
+          <ScalarProperty Name="ID_CUENTA_ENVIO" ColumnName="ID_CUENTA_ENVIO" />
+          <ScalarProperty Name="DINERO" ColumnName="DINERO" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="Tipo_Transaccion" ColumnName="Tipo_Transaccion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RETIRO_EFECTIVO" FunctionName="BANKINGModel.Store.RETIRO_EFECTIVO" />
+  </EntityContainerMapping>
+</Mapping>

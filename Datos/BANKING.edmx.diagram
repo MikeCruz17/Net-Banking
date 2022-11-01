@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f5ba415598d946ef97aecb725fcd6ff9" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="BANKINGModel.CUENTAS" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BANKINGModel.PAGOS" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BANKINGModel.PRESTAMO" Width="1.5" PointX="10.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BANKINGModel.ROL" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="BANKINGModel.TARJETAS" Width="1.5" PointX="10.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BANKINGModel.Usuarios" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="BANKINGModel.FK__CUENTAS__Monto_L__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="BANKINGModel.FK__PAGOS__Cuenta_de__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="BANKINGModel.FK__PAGOS__Fecha__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="BANKINGModel.FK__PRESTAMO__Cuenta__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="BANKINGModel.FK__TARJETAS__Cuenta__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="BANKINGModel.FK__PRESTAMO__Fecha__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="BANKINGModel.FK__Usuarios__ID_Rol__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="BANKINGModel.FK__TARJETAS__Fecha___45F365D3" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BANKINGModel.PAGO_PRESTAMO" Width="1.5" PointX="12.75" PointY="9.625" />
+        <AssociationConnector Association="BANKINGModel.FK__PAGO_PRES__Fecha__55F4C372" />
+        <EntityTypeShape EntityType="BANKINGModel.TRANSACCION_TARJETA" Width="2.125" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BANKINGModel.PAGO_TARJETA" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BANKINGModel.TRANSACCION" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

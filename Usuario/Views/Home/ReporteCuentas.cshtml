@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Entidades.ReportesCuentas>
+
+@{
+    ViewBag.Title = "ReporteCuentas";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+<br />
+<h2>Reporte de Cuentas</h2>
+<hr />
+<br />
+<div class="col-md-offset-2 col-md-10">
+    <a class="btn btn-success" href="/Home/CrearCuentas">Crear</a>
+    <a class="btn btn-primary" href="/Home/Administracion">Volver a Inicio</a>
+    </div>
+    <br />
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cuenta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre_Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monto_Limite)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Estado == "Disponible")
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cuenta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre_Cliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Balance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Monto_Limite)
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" href="/Home/EliminarCuenta/@item.Cuenta">Desactivar</a>
+                        <a class="btn btn-warning" href="/Home/EditarCuenta/@item.Cuenta">Editar</a>
+                    </td>
+                </tr>
+            }
+
+        }
+    </table>

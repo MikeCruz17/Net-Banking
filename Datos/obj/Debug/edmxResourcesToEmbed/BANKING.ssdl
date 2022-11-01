@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BANKINGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CUENTAS">
+    <Key>
+      <PropertyRef Name="Numero" />
+    </Key>
+    <Property Name="Numero" Type="int" Nullable="false" />
+    <Property Name="Cedula" Type="varchar" MaxLength="15" />
+    <Property Name="Balance" Type="int" />
+    <Property Name="Monto_Limite" Type="int" />
+    <Property Name="Estado" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="PAGO_PRESTAMO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_PRESTAMO" Type="int" />
+    <Property Name="Cedula" Type="varchar" MaxLength="15" />
+    <Property Name="Cuenta_id" Type="int" />
+    <Property Name="Cuota_Mensual" Type="int" />
+    <Property Name="Cantidad_meses" Type="int" />
+    <Property Name="Fecha" Type="date" />
+  </EntityType>
+  <EntityType Name="PAGO_TARJETA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_TARJETA" Type="int" />
+    <Property Name="Cuenta_id" Type="int" />
+    <Property Name="Cedula" Type="varchar" MaxLength="15" />
+    <Property Name="Balance" Type="int" />
+    <Property Name="Balance_Limite" Type="int" />
+    <Property Name="Total_Pago" Type="int" />
+    <Property Name="Fecha" Type="date" />
+  </EntityType>
+  <EntityType Name="PAGOS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cuenta_pago" Type="int" />
+    <Property Name="Cuenta_deposito" Type="int" />
+    <Property Name="Monto" Type="int" />
+    <Property Name="Fecha" Type="date" />
+  </EntityType>
+  <EntityType Name="PRESTAMO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Monto" Type="int" />
+    <Property Name="Cedula" Type="varchar" MaxLength="15" />
+    <Property Name="Cuenta_id" Type="int" />
+    <Property Name="Cuota_Mensual" Type="int" />
+    <Property Name="Estado" Type="varchar" MaxLength="25" />
+    <Property Name="Fecha" Type="date" />
+    <Property Name="Cantidad_Meses" Type="int" />
+  </EntityType>
+  <EntityType Name="ROL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TARJETAS">
+    <Key>
+      <PropertyRef Name="Numero" />
+    </Key>
+    <Property Name="Numero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cuenta_id" Type="int" />
+    <Property Name="Cedula" Type="varchar" MaxLength="15" />
+    <Property Name="Fecha_de_Vencimiento" Type="date" />
+    <Property Name="BALANCE" Type="int" />
+    <Property Name="BALANCE_LIMITE" Type="int" />
+    <Property Name="Estatus" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="TRANSACCION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CUENTA_DEPOSITO" Type="int" Nullable="false" />
+    <Property Name="ID_CUENTA_ENVIO" Type="int" />
+    <Property Name="DINERO" Type="int" Nullable="false" />
+    <Property Name="FECHA" Type="date" />
+    <Property Name="Tipo_Transaccion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TRANSACCION_TARJETA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Numero_Tarjeta" Type="int" Nullable="false" />
+    <Property Name="ID_CUENTA_ENVIO" Type="int" Nullable="false" />
+    <Property Name="DINERO" Type="int" Nullable="false" />
+    <Property Name="FECHA" Type="date" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Cedula" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Apellido" Type="varchar" MaxLength="100" />
+    <Property Name="Direccion" Type="varchar" MaxLength="150" />
+    <Property Name="Fecha_Nacimiento" Type="date" />
+    <Property Name="Sexo" Type="varchar" MaxLength="20" />
+    <Property Name="Telefono" Type="varchar" MaxLength="30" />
+    <Property Name="Correo" Type="varchar" MaxLength="75" />
+    <Property Name="Contraseña" Type="varchar" MaxLength="100" />
+    <Property Name="ID_Rol" Type="int" />
+    <Property Name="Estatus" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BANKING.dbo.Reporte_Prestamos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Reporte_Prestamos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="MONTO" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Apellido" Type="varchar" MaxLength="100" />
+    <Property Name="Cuenta_id" Type="int" />
+    <Property Name="Cuota" Type="int" />
+    <Property Name="Estado" Type="varchar" MaxLength="25" />
+    <Property Name="Fecha" Type="date" />
+    <Property Name="Cantidad_Meses" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BANKING.dbo.Reporte_Tarjetas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Reporte_Tarjetas">
+    <Key>
+      <PropertyRef Name="Numero" />
+    </Key>
+    <Property Name="Numero" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Apellido" Type="varchar" MaxLength="100" />
+    <Property Name="BALANCE" Type="int" />
+    <Property Name="Fecha_de_Vencimiento" Type="date" />
+    <Property Name="Estatus" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BANKING.dbo.Reporte_Usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Reporte_Usuarios">
+    <Key>
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Cedula" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Apellido" Type="varchar" MaxLength="100" />
+    <Property Name="Fecha_Nacimiento" Type="date" />
+    <Property Name="Sexo" Type="varchar" MaxLength="20" />
+    <Property Name="Telefono" Type="varchar" MaxLength="30" />
+    <Property Name="Correo" Type="varchar" MaxLength="75" />
+    <Property Name="Contraseña" Type="varchar" MaxLength="100" />
+    <Property Name="Rol" Type="varchar" MaxLength="50" />
+    <Property Name="Estatus" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BANKING.dbo.ReportesCuentas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ReportesCuentas">
+    <Key>
+      <PropertyRef Name="Cuenta" />
+    </Key>
+    <Property Name="Cuenta" Type="int" Nullable="false" />
+    <Property Name="Nombre_Cliente" Type="varchar" MaxLength="100" />
+    <Property Name="Apellido" Type="varchar" MaxLength="100" />
+    <Property Name="Balance" Type="int" />
+    <Property Name="Monto_Limite" Type="int" />
+    <Property Name="Estado" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__CUENTAS__Monto_L__3B75D760">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="CUENTAS" Type="Self.CUENTAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Cedula" />
+      </Principal>
+      <Dependent Role="CUENTAS">
+        <PropertyRef Name="Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PAGO_PRES__Fecha__55F4C372">
+    <End Role="PRESTAMO" Type="Self.PRESTAMO" Multiplicity="0..1" />
+    <End Role="PAGO_PRESTAMO" Type="Self.PAGO_PRESTAMO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRESTAMO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PAGO_PRESTAMO">
+        <PropertyRef Name="ID_PRESTAMO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PAGOS__Cuenta_de__4316F928">
+    <End Role="CUENTAS" Type="Self.CUENTAS" Multiplicity="0..1" />
+    <End Role="PAGOS" Type="Self.PAGOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTAS">
+        <PropertyRef Name="Numero" />
+      </Principal>
+      <Dependent Role="PAGOS">
+        <PropertyRef Name="Cuenta_deposito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PAGOS__Fecha__4222D4EF">
+    <End Role="CUENTAS" Type="Self.CUENTAS" Multiplicity="0..1" />
+    <End Role="PAGOS" Type="Self.PAGOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTAS">
+        <PropertyRef Name="Numero" />
+      </Principal>
+      <Dependent Role="PAGOS">
+        <PropertyRef Name="Cuenta_pago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRESTAMO__Cuenta__3F466844">
+    <End Role="CUENTAS" Type="Self.CUENTAS" Multiplicity="0..1" />
+    <End Role="PRESTAMO" Type="Self.PRESTAMO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTAS">
+        <PropertyRef Name="Numero" />
+      </Principal>
+      <Dependent Role="PRESTAMO">
+        <PropertyRef Name="Cuenta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRESTAMO__Fecha__3E52440B">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="PRESTAMO" Type="Self.PRESTAMO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Cedula" />
+      </Principal>
+      <Dependent Role="PRESTAMO">
+        <PropertyRef Name="Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TARJETAS__Cuenta__46E78A0C">
+    <End Role="CUENTAS" Type="Self.CUENTAS" Multiplicity="0..1" />
+    <End Role="TARJETAS" Type="Self.TARJETAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTAS">
+        <PropertyRef Name="Numero" />
+      </Principal>
+      <Dependent Role="TARJETAS">
+        <PropertyRef Name="Cuenta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TARJETAS__Fecha___45F365D3">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="TARJETAS" Type="Self.TARJETAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Cedula" />
+      </Principal>
+      <Dependent Role="TARJETAS">
+        <PropertyRef Name="Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__ID_Rol__38996AB5">
+    <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="ID_Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="PAGO_DE_TARJETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MONTO_DEUDA" Type="int" Mode="In" />
+    <Parameter Name="NUMERO_TARJETA" Type="int" Mode="In" />
+    <Parameter Name="CUENTA_DESCONTAR" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PAGOS_Prestamos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Cuenta" Type="int" Mode="In" />
+    <Parameter Name="Cuota" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Reporte_TRANSACCIONES_FECHA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FECHA_INICIO" Type="date" Mode="In" />
+    <Parameter Name="FECHA_FIN" Type="date" Mode="In" />
+  </Function>
+  <Function Name="RETIRO_EFECTIVO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cuenta_id" Type="int" Mode="In" />
+    <Parameter Name="Monto" Type="int" Mode="In" />
+  </Function>
+  <Function Name="TRANSACCIONES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cuenta_pago" Type="int" Mode="In" />
+    <Parameter Name="Cuenta_deposito" Type="int" Mode="In" />
+    <Parameter Name="MONTO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="TRANSACCIONES_TARJETAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NumeroTarjeta" Type="int" Mode="In" />
+    <Parameter Name="Cuenta_deposito" Type="int" Mode="In" />
+    <Parameter Name="MONTO" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="BANKINGModelStoreContainer">
+    <EntitySet Name="CUENTAS" EntityType="Self.CUENTAS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAGO_PRESTAMO" EntityType="Self.PAGO_PRESTAMO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAGO_TARJETA" EntityType="Self.PAGO_TARJETA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAGOS" EntityType="Self.PAGOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRESTAMO" EntityType="Self.PRESTAMO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TARJETAS" EntityType="Self.TARJETAS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRANSACCION" EntityType="Self.TRANSACCION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRANSACCION_TARJETA" EntityType="Self.TRANSACCION_TARJETA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reporte_Prestamos" EntityType="Self.Reporte_Prestamos" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Reporte_Prestamos].[ID] AS [ID], 
+    [Reporte_Prestamos].[MONTO] AS [MONTO], 
+    [Reporte_Prestamos].[Nombre] AS [Nombre], 
+    [Reporte_Prestamos].[Apellido] AS [Apellido], 
+    [Reporte_Prestamos].[Cuenta_id] AS [Cuenta_id], 
+    [Reporte_Prestamos].[Cuota] AS [Cuota], 
+    [Reporte_Prestamos].[Estado] AS [Estado], 
+    [Reporte_Prestamos].[Fecha] AS [Fecha], 
+    [Reporte_Prestamos].[Cantidad_Meses] AS [Cantidad_Meses]
+    FROM [dbo].[Reporte_Prestamos] AS [Reporte_Prestamos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Reporte_Tarjetas" EntityType="Self.Reporte_Tarjetas" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Reporte_Tarjetas].[Numero] AS [Numero], 
+    [Reporte_Tarjetas].[Nombre] AS [Nombre], 
+    [Reporte_Tarjetas].[Apellido] AS [Apellido], 
+    [Reporte_Tarjetas].[BALANCE] AS [BALANCE], 
+    [Reporte_Tarjetas].[Fecha_de_Vencimiento] AS [Fecha_de_Vencimiento], 
+    [Reporte_Tarjetas].[Estatus] AS [Estatus]
+    FROM [dbo].[Reporte_Tarjetas] AS [Reporte_Tarjetas]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Reporte_Usuarios" EntityType="Self.Reporte_Usuarios" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Reporte_Usuarios].[Cedula] AS [Cedula], 
+    [Reporte_Usuarios].[Nombre] AS [Nombre], 
+    [Reporte_Usuarios].[Apellido] AS [Apellido], 
+    [Reporte_Usuarios].[Fecha_Nacimiento] AS [Fecha_Nacimiento], 
+    [Reporte_Usuarios].[Sexo] AS [Sexo], 
+    [Reporte_Usuarios].[Telefono] AS [Telefono], 
+    [Reporte_Usuarios].[Correo] AS [Correo], 
+    [Reporte_Usuarios].[Contraseña] AS [Contraseña], 
+    [Reporte_Usuarios].[Rol] AS [Rol], 
+    [Reporte_Usuarios].[Estatus] AS [Estatus]
+    FROM [dbo].[Reporte_Usuarios] AS [Reporte_Usuarios]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ReportesCuentas" EntityType="Self.ReportesCuentas" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ReportesCuentas].[Cuenta] AS [Cuenta], 
+    [ReportesCuentas].[Nombre_Cliente] AS [Nombre_Cliente], 
+    [ReportesCuentas].[Apellido] AS [Apellido], 
+    [ReportesCuentas].[Balance] AS [Balance], 
+    [ReportesCuentas].[Monto_Limite] AS [Monto_Limite], 
+    [ReportesCuentas].[Estado] AS [Estado]
+    FROM [dbo].[ReportesCuentas] AS [ReportesCuentas]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__CUENTAS__Monto_L__3B75D760" Association="Self.FK__CUENTAS__Monto_L__3B75D760">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="CUENTAS" EntitySet="CUENTAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PAGO_PRES__Fecha__55F4C372" Association="Self.FK__PAGO_PRES__Fecha__55F4C372">
+      <End Role="PRESTAMO" EntitySet="PRESTAMO" />
+      <End Role="PAGO_PRESTAMO" EntitySet="PAGO_PRESTAMO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PAGOS__Cuenta_de__4316F928" Association="Self.FK__PAGOS__Cuenta_de__4316F928">
+      <End Role="CUENTAS" EntitySet="CUENTAS" />
+      <End Role="PAGOS" EntitySet="PAGOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PAGOS__Fecha__4222D4EF" Association="Self.FK__PAGOS__Fecha__4222D4EF">
+      <End Role="CUENTAS" EntitySet="CUENTAS" />
+      <End Role="PAGOS" EntitySet="PAGOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRESTAMO__Cuenta__3F466844" Association="Self.FK__PRESTAMO__Cuenta__3F466844">
+      <End Role="CUENTAS" EntitySet="CUENTAS" />
+      <End Role="PRESTAMO" EntitySet="PRESTAMO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRESTAMO__Fecha__3E52440B" Association="Self.FK__PRESTAMO__Fecha__3E52440B">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="PRESTAMO" EntitySet="PRESTAMO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TARJETAS__Cuenta__46E78A0C" Association="Self.FK__TARJETAS__Cuenta__46E78A0C">
+      <End Role="CUENTAS" EntitySet="CUENTAS" />
+      <End Role="TARJETAS" EntitySet="TARJETAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TARJETAS__Fecha___45F365D3" Association="Self.FK__TARJETAS__Fecha___45F365D3">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="TARJETAS" EntitySet="TARJETAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__ID_Rol__38996AB5" Association="Self.FK__Usuarios__ID_Rol__38996AB5">
+      <End Role="ROL" EntitySet="ROL" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

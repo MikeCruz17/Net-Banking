@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Entidades.Reporte_Tarjetas>
+
+@{
+    ViewBag.Title = "ReporteTarjetas";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+<br />
+<h2>Reporte de Tarjetas</h2>
+<hr />
+
+<div class="col-md-offset-2 col-md-10">
+    <br />
+    <a class="btn btn-success" href="/Home/CrearTarjetas">Añadir</a>
+    <a class="btn btn-primary" href="/Home/Administracion">Volver a Inicio</a>
+    <br />
+    <br />
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BALANCE)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha_de_Vencimiento)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Estatus == "Activo")
+            {
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Numero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BALANCE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha_de_Vencimiento)
+        </td>
+        <td>
+            <a class="btn btn-danger" href="/Home/EliminarTarjeta/@item.Numero">Desactivar</a>
+            <a class="btn btn-warning" href="/Home/EditarTarjeta/@item.Numero">Editar</a>
+        </td>
+    </tr>
+            }
+        }
+
+    </table>

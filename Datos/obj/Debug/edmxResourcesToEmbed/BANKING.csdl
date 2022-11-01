@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BANKINGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CUENTAS">
+    <Key>
+      <PropertyRef Name="Numero" />
+    </Key>
+    <Property Name="Numero" Type="Int32" Nullable="false" />
+    <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Balance" Type="Int32" />
+    <Property Name="Monto_Limite" Type="Int32" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__CUENTAS__Monto_L__3B75D760" FromRole="CUENTAS" ToRole="Usuarios" />
+    <NavigationProperty Name="PAGOS" Relationship="Self.FK__PAGOS__Cuenta_de__4316F928" FromRole="CUENTAS" ToRole="PAGOS" />
+    <NavigationProperty Name="PAGOS1" Relationship="Self.FK__PAGOS__Fecha__4222D4EF" FromRole="CUENTAS" ToRole="PAGOS" />
+    <NavigationProperty Name="PRESTAMO" Relationship="Self.FK__PRESTAMO__Cuenta__3F466844" FromRole="CUENTAS" ToRole="PRESTAMO" />
+    <NavigationProperty Name="TARJETAS" Relationship="Self.FK__TARJETAS__Cuenta__46E78A0C" FromRole="CUENTAS" ToRole="TARJETAS" />
+    <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PAGOS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cuenta_pago" Type="Int32" />
+    <Property Name="Cuenta_deposito" Type="Int32" />
+    <Property Name="Monto" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="CUENTAS" Relationship="Self.FK__PAGOS__Cuenta_de__4316F928" FromRole="PAGOS" ToRole="CUENTAS" />
+    <NavigationProperty Name="CUENTAS1" Relationship="Self.FK__PAGOS__Fecha__4222D4EF" FromRole="PAGOS" ToRole="CUENTAS" />
+  </EntityType>
+  <EntityType Name="PRESTAMO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Monto" Type="Int32" />
+    <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Cuenta_id" Type="Int32" />
+    <Property Name="Cuota_Mensual" Type="Int32" />
+    <Property Name="Estado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="CUENTAS" Relationship="Self.FK__PRESTAMO__Cuenta__3F466844" FromRole="PRESTAMO" ToRole="CUENTAS" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__PRESTAMO__Fecha__3E52440B" FromRole="PRESTAMO" ToRole="Usuarios" />
+    <Property Name="Cantidad_Meses" Type="Int32" />
+    <NavigationProperty Name="PAGO_PRESTAMO" Relationship="BANKINGModel.FK__PAGO_PRES__Fecha__55F4C372" FromRole="PRESTAMO" ToRole="PAGO_PRESTAMO" />
+  </EntityType>
+  <EntityType Name="ROL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__ID_Rol__38996AB5" FromRole="ROL" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="TARJETAS">
+    <Key>
+      <PropertyRef Name="Numero" />
+    </Key>
+    <Property Name="Numero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cuenta_id" Type="Int32" />
+    <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_de_Vencimiento" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="CUENTAS" Relationship="Self.FK__TARJETAS__Cuenta__46E78A0C" FromRole="TARJETAS" ToRole="CUENTAS" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__TARJETAS__Fecha___45F365D3" FromRole="TARJETAS" ToRole="Usuarios" />
+    <Property Name="BALANCE" Type="Int32" />
+    <Property Name="BALANCE_LIMITE" Type="Int32" />
+    <Property Name="Estatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
+    <Property Name="Sexo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ID_Rol" Type="Int32" />
+    <NavigationProperty Name="CUENTAS" Relationship="Self.FK__CUENTAS__Monto_L__3B75D760" FromRole="Usuarios" ToRole="CUENTAS" />
+    <NavigationProperty Name="PRESTAMO" Relationship="Self.FK__PRESTAMO__Fecha__3E52440B" FromRole="Usuarios" ToRole="PRESTAMO" />
+    <NavigationProperty Name="ROL" Relationship="Self.FK__Usuarios__ID_Rol__38996AB5" FromRole="Usuarios" ToRole="ROL" />
+    <NavigationProperty Name="TARJETAS" Relationship="Self.FK__TARJETAS__Fecha___45F365D3" FromRole="Usuarios" ToRole="TARJETAS" />
+    <Property Name="Estatus" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__CUENTAS__Monto_L__3B75D760">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="CUENTAS" Type="Self.CUENTAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Cedula" />
+      </Principal>
+      <Dependent Role="CUENTAS">
+        <PropertyRef Name="Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PAGOS__Cuenta_de__4316F928">
+    <End Role="CUENTAS" Type="Self.CUENTAS" Multiplicity="0..1" />
+    <End Role="PAGOS" Type="Self.PAGOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTAS">
+        <PropertyRef Name="Numero" />
+      </Principal>
+      <Dependent Role="PAGOS">
+        <PropertyRef Name="Cuenta_deposito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PAGOS__Fecha__4222D4EF">
+    <End Role="CUENTAS" Type="Self.CUENTAS" Multiplicity="0..1" />
+    <End Role="PAGOS" Type="Self.PAGOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTAS">
+        <PropertyRef Name="Numero" />
+      </Principal>
+      <Dependent Role="PAGOS">
+        <PropertyRef Name="Cuenta_pago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRESTAMO__Cuenta__3F466844">
+    <End Role="CUENTAS" Type="Self.CUENTAS" Multiplicity="0..1" />
+    <End Role="PRESTAMO" Type="Self.PRESTAMO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTAS">
+        <PropertyRef Name="Numero" />
+      </Principal>
+      <Dependent Role="PRESTAMO">
+        <PropertyRef Name="Cuenta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TARJETAS__Cuenta__46E78A0C">
+    <End Role="CUENTAS" Type="Self.CUENTAS" Multiplicity="0..1" />
+    <End Role="TARJETAS" Type="Self.TARJETAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTAS">
+        <PropertyRef Name="Numero" />
+      </Principal>
+      <Dependent Role="TARJETAS">
+        <PropertyRef Name="Cuenta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRESTAMO__Fecha__3E52440B">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="PRESTAMO" Type="Self.PRESTAMO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Cedula" />
+      </Principal>
+      <Dependent Role="PRESTAMO">
+        <PropertyRef Name="Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__ID_Rol__38996AB5">
+    <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="ID_Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TARJETAS__Fecha___45F365D3">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="TARJETAS" Type="Self.TARJETAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Cedula" />
+      </Principal>
+      <Dependent Role="TARJETAS">
+        <PropertyRef Name="Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BANKINGEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CUENTAS" EntityType="Self.CUENTAS" />
+    <EntitySet Name="PAGOS" EntityType="Self.PAGOS" />
+    <EntitySet Name="PRESTAMO" EntityType="Self.PRESTAMO" />
+    <EntitySet Name="ROL" EntityType="Self.ROL" />
+    <EntitySet Name="TARJETAS" EntityType="Self.TARJETAS" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <AssociationSet Name="FK__CUENTAS__Monto_L__3B75D760" Association="Self.FK__CUENTAS__Monto_L__3B75D760">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="CUENTAS" EntitySet="CUENTAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PAGOS__Cuenta_de__4316F928" Association="Self.FK__PAGOS__Cuenta_de__4316F928">
+      <End Role="CUENTAS" EntitySet="CUENTAS" />
+      <End Role="PAGOS" EntitySet="PAGOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PAGOS__Fecha__4222D4EF" Association="Self.FK__PAGOS__Fecha__4222D4EF">
+      <End Role="CUENTAS" EntitySet="CUENTAS" />
+      <End Role="PAGOS" EntitySet="PAGOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRESTAMO__Cuenta__3F466844" Association="Self.FK__PRESTAMO__Cuenta__3F466844">
+      <End Role="CUENTAS" EntitySet="CUENTAS" />
+      <End Role="PRESTAMO" EntitySet="PRESTAMO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TARJETAS__Cuenta__46E78A0C" Association="Self.FK__TARJETAS__Cuenta__46E78A0C">
+      <End Role="CUENTAS" EntitySet="CUENTAS" />
+      <End Role="TARJETAS" EntitySet="TARJETAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRESTAMO__Fecha__3E52440B" Association="Self.FK__PRESTAMO__Fecha__3E52440B">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="PRESTAMO" EntitySet="PRESTAMO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__ID_Rol__38996AB5" Association="Self.FK__Usuarios__ID_Rol__38996AB5">
+      <End Role="ROL" EntitySet="ROL" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TARJETAS__Fecha___45F365D3" Association="Self.FK__TARJETAS__Fecha___45F365D3">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="TARJETAS" EntitySet="TARJETAS" />
+    </AssociationSet>
+    <FunctionImport Name="PAGO_DE_TARJETA">
+      <Parameter Name="MONTO_DEUDA" Mode="In" Type="Int32" />
+      <Parameter Name="NUMERO_TARJETA" Mode="In" Type="Int32" />
+      <Parameter Name="CUENTA_DESCONTAR" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="PAGOS_Prestamos">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="Cuenta" Mode="In" Type="Int32" />
+      <Parameter Name="Cuota" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="TRANSACCIONES">
+      <Parameter Name="Cuenta_pago" Mode="In" Type="Int32" />
+      <Parameter Name="Cuenta_deposito" Mode="In" Type="Int32" />
+      <Parameter Name="MONTO" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Reporte_Prestamos" EntityType="BANKINGModel.Reporte_Prestamos" />
+    <EntitySet Name="Reporte_Tarjetas" EntityType="BANKINGModel.Reporte_Tarjetas" />
+    <EntitySet Name="Reporte_Usuarios" EntityType="BANKINGModel.Reporte_Usuarios" />
+    <EntitySet Name="ReportesCuentas" EntityType="BANKINGModel.ReportesCuentas" />
+    <EntitySet Name="PAGO_PRESTAMO" EntityType="BANKINGModel.PAGO_PRESTAMO" />
+    <AssociationSet Name="FK__PAGO_PRES__Fecha__55F4C372" Association="BANKINGModel.FK__PAGO_PRES__Fecha__55F4C372">
+      <End Role="PRESTAMO" EntitySet="PRESTAMO" />
+      <End Role="PAGO_PRESTAMO" EntitySet="PAGO_PRESTAMO" />
+    </AssociationSet>
+    <EntitySet Name="TRANSACCION_TARJETA" EntityType="BANKINGModel.TRANSACCION_TARJETA" />
+    <EntitySet Name="PAGO_TARJETA" EntityType="BANKINGModel.PAGO_TARJETA" />
+    <FunctionImport Name="TRANSACCIONES_TARJETAS">
+      <Parameter Name="NumeroTarjeta" Mode="In" Type="Int32" />
+      <Parameter Name="Cuenta_deposito" Mode="In" Type="Int32" />
+      <Parameter Name="MONTO" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="TRANSACCION" EntityType="BANKINGModel.TRANSACCION" />
+    <FunctionImport Name="Reporte_TRANSACCIONES_FECHA" ReturnType="Collection(BANKINGModel.Reporte_TRANSACCIONES_FECHA_Result)">
+      <Parameter Name="FECHA_INICIO" Mode="In" Type="DateTime" />
+      <Parameter Name="FECHA_FIN" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="RETIRO_EFECTIVO">
+      <Parameter Name="Cuenta_id" Mode="In" Type="Int32" />
+      <Parameter Name="Monto" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Reporte_Prestamos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="MONTO" Type="Int32" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Cuenta_id" Type="Int32" />
+    <Property Name="Cuota" Type="Int32" />
+    <Property Name="Estado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
+    <Property Name="Cantidad_Meses" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Reporte_Tarjetas">
+    <Key>
+      <PropertyRef Name="Numero" />
+    </Key>
+    <Property Name="Numero" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_de_Vencimiento" Type="DateTime" Precision="0" />
+    <Property Name="Estatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="BALANCE" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Reporte_Usuarios">
+    <Key>
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Cedula" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
+    <Property Name="Sexo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Estatus" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ReportesCuentas">
+    <Key>
+      <PropertyRef Name="Cuenta" />
+    </Key>
+    <Property Name="Cuenta" Type="Int32" Nullable="false" />
+    <Property Name="Nombre_Cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Balance" Type="Int32" />
+    <Property Name="Monto_Limite" Type="Int32" />
+    <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PAGO_PRESTAMO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PRESTAMO" Type="Int32" />
+    <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Cuenta_id" Type="Int32" />
+    <Property Name="Cuota_Mensual" Type="Int32" />
+    <Property Name="Cantidad_meses" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="PRESTAMO" Relationship="BANKINGModel.FK__PAGO_PRES__Fecha__55F4C372" FromRole="PAGO_PRESTAMO" ToRole="PRESTAMO" />
+  </EntityType>
+  <Association Name="FK__PAGO_PRES__Fecha__55F4C372">
+    <End Type="BANKINGModel.PRESTAMO" Role="PRESTAMO" Multiplicity="0..1" />
+    <End Type="BANKINGModel.PAGO_PRESTAMO" Role="PAGO_PRESTAMO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRESTAMO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PAGO_PRESTAMO">
+        <PropertyRef Name="ID_PRESTAMO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TRANSACCION_TARJETA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Numero_Tarjeta" Type="Int32" Nullable="false" />
+    <Property Name="ID_CUENTA_ENVIO" Type="Int32" Nullable="false" />
+    <Property Name="DINERO" Type="Int32" Nullable="false" />
+    <Property Name="FECHA" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="PAGO_TARJETA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_TARJETA" Type="Int32" />
+    <Property Name="Cuenta_id" Type="Int32" />
+    <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Balance" Type="Int32" />
+    <Property Name="Balance_Limite" Type="Int32" />
+    <Property Name="Total_Pago" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="TRANSACCION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CUENTA_DEPOSITO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CUENTA_ENVIO" Type="Int32" />
+    <Property Name="DINERO" Type="Int32" Nullable="false" />
+    <Property Name="FECHA" Type="DateTime" Precision="0" />
+    <Property Name="Tipo_Transaccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="Reporte_TRANSACCIONES_FECHA_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="ID_CUENTA_DEPOSITO" Nullable="false" />
+    <Property Type="Int32" Name="ID_CUENTA_ENVIO" Nullable="true" />
+    <Property Type="Int32" Name="DINERO" Nullable="false" />
+    <Property Type="DateTime" Name="FECHA" Nullable="true" />
+    <Property Type="String" Name="Tipo_Transaccion" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

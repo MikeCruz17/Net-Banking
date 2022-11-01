@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Entidades.PAGO_PRESTAMO>
+
+@{
+    ViewBag.Title = "ReportePago";
+}
+
+<br />
+<h2>Historial de Pagos</h2>
+<hr />
+<br />
+
+<a class="btn btn-outline-dark" href="/Cliente/Prestamos">Volver</a>
+<br />
+<br />
+<table class="table table-dark table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuota_Mensual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad_meses)
+        </th>
+
+    
+    </tr>
+
+@foreach (var item in Model) {
+   
+    if(item.Cedula == @ViewBag.Cedula)
+                {
+    <tr>
+   
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cuenta_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cuota_Mensual)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cantidad_meses)
+        </td>
+         
+    </tr>
+    }
+}
+</table>

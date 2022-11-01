@@ -1,0 +1,96 @@
+﻿@model Entidades.PAGO_TARJETA
+
+@{
+    ViewBag.Title = "PagoTarjetas";
+}
+
+<br />
+<h2>Pago de Tarjeta</h2>
+<hr />
+<br />
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cuenta_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 p-0 w-25">
+             <input class="form-control" value="@ViewBag.Cuenta_id" name="Cuenta_id" readonly/>
+                @Html.ValidationMessageFor(model => model.Cuenta_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      <div class="form-group">
+            @Html.LabelFor(model => model.Balance, htmlAttributes: new { @class = "control-label col-md-2" })
+          <div class="col-md-10 p-0 w-25">
+
+              <input class="form-control" value="@ViewBag.Balance" name="BALANCE" readonly id ="Balance"/>
+
+              @Html.ValidationMessageFor(model => model.Balance, "", new { @class = "text-danger" })
+          </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Balance_Limite, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 p-0 w-25">
+
+                <input class="form-control" value="@ViewBag.BalanceL" name="BALANCE_LIMITE" id ="BalanceL" readonly/>
+
+
+                @Html.ValidationMessageFor(model => model.Balance_Limite, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Total_Pago, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 p-0 w-25">
+
+                <input class="form-control" name="Total_Pago" id="Total" readonly/>
+
+
+                @Html.ValidationMessageFor(model => model.Total_Pago, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 p-0 w-25">
+
+                <input class="form-control" name="Fecha" value="@ViewBag.Fecha" readonly />
+
+                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <br />
+                <input type="submit" value="Pagar" class="btn btn-outline-dark" />
+                <a class="btn btn-outline-primary" href="/Cliente/Tarjetas">Volver</a>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+
+    window.onload = function() {
+
+        let Balance = document.getElementById('Balance').value;
+        let BalanceL = document.getElementById('BalanceL').value;
+
+        let Total = parseInt(BalanceL) - parseInt(Balance);
+
+        document.getElementById('Total').value = Total;
+    };
+
+</script>
+
+
